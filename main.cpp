@@ -242,6 +242,7 @@ protected:
 
     void DeleteUserVector() {
         UserInput userInput;
+        char confirmation;
         cout << "Enter username: \t";
         cin >> userInput.Username;
         UserInput fromFile;
@@ -261,6 +262,15 @@ protected:
         DisplayPassword(::strlen(fromFile.Password));
         cout << endl;
         cout << "**************************************************" << endl;
+
+        cout
+                << "Are you sure you want to delete this record? This action cannot be undone. Press Y to proceed, any other key to discard: \t";
+
+        cin >> confirmation;
+
+        if (confirmation != 'Y' && confirmation != 'y') {
+            return;
+        }
 
         fstream authFile, tempFile;
         users = GetUsers();
@@ -287,7 +297,7 @@ public:
     void Initialize() {
         while (true) {
             char shouldContinue;
-            int choice;
+            char choice;
 
             cout << "---------------" << endl;
 
@@ -300,23 +310,23 @@ public:
             cin >> choice;
 
             switch (choice) {
-                case 1: {
+                case '1': {
                     DisplayUsers();
                     break;
                 }
-                case 2: {
+                case '2': {
                     UpdateUser();
                     break;
                 }
-                case 3: {
+                case '3': {
                     DeleteUser();
                     break;
                 }
-                case 4: {
+                case '4': {
                     UpdateUserVector();
                     break;
                 }
-                case 5 : {
+                case '5' : {
                     DeleteUserVector();
                     break;
                 }
